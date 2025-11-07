@@ -152,7 +152,8 @@
   .typewriter {
     overflow: hidden;
     border-right: .15em solid #e91e63;
-    white-space: nowrap;
+    /* Changed from white-space: nowrap to allow wrapping while preserving animation */
+    white-space: normal;
     margin: 0 auto;
     letter-spacing: .15em;
     animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
@@ -161,11 +162,26 @@
     color: #c2185b;
     width: fit-content;
     max-width: 90%;
+    /* Added word-break to ensure proper wrapping */
+    word-break: break-word;
+    /* Added padding for better spacing */
+    padding: 10px;
+    /* Center text for better appearance */
+    text-align: center;
+    /* Adjusted line height for better readability */
+    line-height: 1.4;
   }
 
+  /* Typewriter animation keyframes adjusted for wrapping text */
   @keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
+    from { 
+      width: 0;
+      opacity: 0;
+    }
+    to { 
+      width: 100%;
+      opacity: 1;
+    }
   }
 
   @keyframes blink-caret {
@@ -236,6 +252,12 @@
     
     .typewriter {
       font-size: 1.7em;
+      /* Reduced padding on smaller screens */
+      padding: 8px;
+      /* Further reduced letter spacing for small screens */
+      letter-spacing: 0.1em;
+      /* Adjusted animation for smaller screens */
+      animation: typing 2.5s steps(30, end), blink-caret .75s step-end infinite;
     }
     
     .button {
@@ -261,6 +283,13 @@
     
     .typewriter {
       font-size: 1.4em;
+      /* Even smaller padding and letter spacing for very small screens */
+      padding: 6px;
+      letter-spacing: 0.05em;
+      /* Slightly increased line height for readability */
+      line-height: 1.5;
+      /* Adjusted animation for very small screens */
+      animation: typing 2s steps(25, end), blink-caret .75s step-end infinite;
     }
     
     .button {
@@ -271,6 +300,17 @@
     footer {
       font-size: 1.2em;
       padding: 30px 10px;
+    }
+  }
+
+  /* Extra small screens */
+  @media (max-width: 320px) {
+    .typewriter {
+      font-size: 1.2em;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+      /* Adjusted animation for extra small screens */
+      animation: typing 1.8s steps(20, end), blink-caret .75s step-end infinite;
     }
   }
 </style>
@@ -393,7 +433,7 @@
       case 'my': // Myanmar
         confessionMessage.innerHTML = "ဘေဘီက မောင့် ကမ္ဘာကြီးလှပနေတဲ့အကြောင်းရင်းပါပဲ<br>ဘေဘီနဲ့တွေ့တဲ့အချိန်ကစပြီး မောင့်နှလုံးသားကအိမ်ကိုပြန်တွေ့ခဲ့သလိုပဲ။<br>နှလုံးခုန်တိုင်းမှာ ဘေဘီ့ကိုပိုပြီးချစ်လာတယ်။💞";
         surpriseMessage.innerHTML = "ဘာတွေပဲဖြစ်နေပါစေ၊ မောင့် နှလုံးသားက အမြဲတမ်း ဘေဘီ့ဆီမှာ ရှိနေမှာပါ";
-        surpriseBold.innerHTML = "ကျေးဇူးပြုပြီး မောင့်ကို ခွင့်လွှတ်ပေးပါ၊ မောင်ကဘေဘီ့ကိုတကယ်အများကြီးချစ်တာပါ💞";
+        surpriseBold.innerHTML = "ကျေးဇူးပြုပြီး မောင်ကဘေဘီ့ကိုတကယ်အများကြီးချစ်တာပါ💞";
         break;
       case 'ko': // Korean
         confessionMessage.innerHTML = "당신은 내 세상이 아름다운 이유입니다. 당신을 만난 순간부터 제 마음은 집을 찾았습니다. 심장이 뛰는 모든 순간 당신을 더 사랑합니다. 💞";
